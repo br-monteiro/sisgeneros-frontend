@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <menu-right></menu-right>
-    <top-navigation></top-navigation>
-    <slot></slot>
-    <footer-navigation></footer-navigation>
+  <div id="app" class="container body">
+    <div class="main_container">
+      <menu-right></menu-right>
+      <top-navigation></top-navigation>
+      <slot></slot>
+      <footer-navigation></footer-navigation>
+    </div>
   </div>
 </template>
 
