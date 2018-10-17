@@ -1,8 +1,14 @@
+import FormLogin from '@/components/auth/FormLogin';
 import HelloWorld from '@/components/HelloWorld';
 
 const routes = [
   {
-    path: '/auth',
+    path: '/login',
+    name: 'formLogin',
+    component: FormLogin,
+  },
+  {
+    path: '/hello',
     name: 'HelloWorld',
     component: HelloWorld,
   },
