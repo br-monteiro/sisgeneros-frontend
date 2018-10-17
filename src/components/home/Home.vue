@@ -2,7 +2,22 @@
   <div>
     <template-default pgtitle="Home">
       <loaging-bar v-show="progress"></loaging-bar>
-      <box-content class="col-md-6 col-sm-12 col-xs-12">
+      <box-content class="col-md-6 col-sm-12 col-xs-12" boxtitle="esse é o primeiro 1">
+        tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>
+      </box-content>
+      <box-content class="col-md-6 col-sm-12 col-xs-12" boxtitle="esse é o primeiro 2">
+        tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>
+      </box-content>
+            <box-content class="col-md-6 col-sm-12 col-xs-12" boxtitle="esse é o primeiro 3">
+        tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>
+      </box-content>
+      <box-content class="col-md-6 col-sm-12 col-xs-12" boxtitle="esse é o primeiro 4">
+        tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>
+      </box-content>
+            <box-content class="col-md-6 col-sm-12 col-xs-12" boxtitle="esse é o primeiro 5">
+        tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>
+      </box-content>
+      <box-content class="col-md-6 col-sm-12 col-xs-12" boxtitle="esse é o primeiro 6">
         tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>tetstet <br>
       </box-content>
     </template-default>
