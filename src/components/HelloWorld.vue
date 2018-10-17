@@ -61,7 +61,7 @@
 
 <script>
 import TemplateDefault from './layout/TemplateDefault';
-import LoagingBar from './LoadingBar';
+import LoagingBar from './layout/LoadingBar';
 
 export default {
   name: 'HelloWorld',

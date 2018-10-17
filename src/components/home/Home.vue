@@ -431,7 +431,7 @@
 <script>
 import TemplateDefault from '../layout/TemplateDefault';
 import Authenticator from '../../common/Authenticator';
-import LoagingBar from '../LoadingBar';
+import LoagingBar from '../layout/LoadingBar';
 
 export default {
   name: 'home',

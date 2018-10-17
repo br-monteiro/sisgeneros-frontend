@@ -31,7 +31,7 @@
 import Vue from 'vue';
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
-import LoadingBar from '../LoadingBar';
+import LoadingBar from '../layout/LoadingBar';
 
 const baseUrl = Configurations.BASE_URL_PAI;
 
