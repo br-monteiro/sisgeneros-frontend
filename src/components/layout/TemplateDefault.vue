@@ -3,7 +3,21 @@
     <div class="main_container">
       <menu-right></menu-right>
       <top-navigation></top-navigation>
-      <slot></slot>
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div>
+          <div class="page-title">
+            <div class="title_left">
+              <h3>{{pgtitle}}</h3>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="row">
+            <slot></slot>
+          </div>
+        </div>
+      </div>
+      <!-- /page content -->
       <footer-navigation></footer-navigation>
     </div>
   </div>
@@ -16,6 +30,7 @@ import FooterNavigation from './FooterNavigation';
 
 export default {
   name: 'template-default',
+  props: ['pgtitle'],
   components: {
     MenuRight,
     TopNavigation,
