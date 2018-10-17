@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div v-show="progress">
-      <loading-bar></loading-bar>
-    </div>
+    <loading-bar v-show="progress"></loading-bar>
     <div class="login_wrapper">
       <div class="animate form login_form">
         <section class="login_content">
@@ -53,6 +51,7 @@ export default {
     if (Authenticator.isLoggedIn()) {
       this.$router.push('/');
     }
+    $('body').addClass('login');
   },
   methods: {
     login() {
@@ -72,6 +71,8 @@ export default {
           Authenticator.registerUser(response);
           // deactivating progress bar
           this.progress = false;
+          // remove login class
+          $('body').removeClass('login');
           // redirect to home
           this.$router.push('/');
         })
