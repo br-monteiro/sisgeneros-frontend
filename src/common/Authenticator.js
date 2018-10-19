@@ -14,4 +14,6 @@ const registerUser = (data) => {
   fn.setLocalStorage('dataUser', dataUser);
 };
 
-export default { isLoggedIn, registerUser };
+const getDataUser = () => fn.getLocalStorage('dataUser');
+
+export default { isLoggedIn, registerUser, getDataUser };
