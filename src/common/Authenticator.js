@@ -14,6 +14,32 @@ const registerUser = (data) => {
   fn.setLocalStorage('dataUser', dataUser);
 };
 
+const removeUser = () => {
+  fn.setLocalStorage('dataUser', {});
+};
+
+// const dialog = (//)
+
+const commonDialog = (component, rawResponse, schemaMesage) => {
+  const response = rawResponse.response;
+  if (response) {
+    const data = response.data;
+    const httpCode = response.status;
+    const message = data.message;
+    const status = data.status;
+    const details = data.details;
+
+    if (httpCode === 401 && message === 'User with expired authentication') {
+      removeUser();
+      component.$router.push('/login');
+    }
+
+    if (httpCode === 400 && typeof component.dialog === 'function') {
+      rawResponse.dialog();
+    }
+  }
+};
+
 const getDataUser = () => fn.getLocalStorage('dataUser');
 
-export default { isLoggedIn, registerUser, getDataUser };
+export default { isLoggedIn, registerUser, getDataUser, removeUser, commonDialog };
