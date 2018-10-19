@@ -5026,7 +5026,12 @@ if (typeof NProgress != 'undefined') {
 }
 setup();
 
-window.addEventListener("hashchange", function() {
-  console.log('run resize');
-  setup();
-});
+// it's so wrong =(
+setInterval(function() {
+  const el = document.querySelector('.right_col');
+  const elMinHeight = el && el.style.minHeight.replace('px', '');
+  if (el && parseInt(elMinHeight || 0) === 0) {
+    console.log("resizing...");
+    setup();
+  }
+}, 300);
