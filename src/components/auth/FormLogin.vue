@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
 import LoadingBar from '../layout/LoadingBar';
@@ -62,7 +61,7 @@ export default {
       // active progress bar
       this.progress = true;
 
-      Vue.axios.post(baseUrl.concat('auth'), {
+      this.axios.post(baseUrl.concat('auth'), {
         username: this.username,
         password: this.password,
       })
