@@ -30,7 +30,7 @@ const dialog = (component, rawResponse, schemaMessage) => {
             return `${i} no mínimo ${el.minLength} caracteres`;
           }
           if (el.constraint === 'maxLength') {
-            return `${i} no máximo ${el.minLength} caracteres`;
+            return `${i} no máximo ${el.maxLength} caracteres`;
           }
           if (el.constraint === 'minimum') {
             return `${i} deve ser no mínimo ${el.minimum}`;
