@@ -33,6 +33,16 @@
                         <li><a href="/#/refeicoes/new">Registrar</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a>
+                        <i class="fa fa-briefcase"></i> Fornecedores
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                    <ul class="nav child_menu">
+                        <li><a href="/#/fornecedores">Listar</a></li>
+                        <li><a href="/#/fornecedores/new">Registrar</a></li>
+                    </ul>
+                </li>
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="form.html">General Form</a></li>
