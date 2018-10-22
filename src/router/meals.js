@@ -1,5 +1,5 @@
-import MealsList from '@/components/meals/MealsList';
-import MealsForm from '@/components/meals/MealsForm';
+import MealsList from '@/components/meals/List';
+import MealsForm from '@/components/meals/Form';
 
 const routes = [
   {
