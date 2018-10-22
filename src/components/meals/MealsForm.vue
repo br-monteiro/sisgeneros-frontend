@@ -37,6 +37,8 @@ import Authenticator from '../../common/Authenticator';
 import TemplateDefault from '../layout/TemplateDefault';
 import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
+import schemaMessage from './schemaMessage';
+import error from '../../common/DialogError';
 
 const baseUrl = Configurations.BASE_URL_PAI;
 
@@ -108,7 +110,7 @@ export default {
             if (response.response && response.response.status === 404) {
               this.$router.push('/refeicoes');
             }
-            console.error(response);
+            error.dialog(this, response, schemaMessage);
           });
       } else {
         this.axios.post(`${baseUrl}meals`, {
@@ -128,7 +130,7 @@ export default {
             if (response.response && response.response.status === 404) {
               this.$router.push('/refeicoes');
             }
-            console.error(response);
+            error.dialog(this, response, schemaMessage);
           });
       }
     },
