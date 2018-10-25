@@ -22,12 +22,17 @@ const dialog = (component, rawResponse, schemaMessage) => {
       if (schemaMessage.maps && error) {
         msg = error.length > 1 ? 'Os seguintes campos são obrigatórios: ' : 'O seguinte campo é obrigatório: ';
         msg += error.map((el) => {
-          const i = schemaMessage.maps[el.property];
+          const propertyName = el.property.replace(/([[\]\d.]+)/g, '_');
+          const i = schemaMessage.maps[propertyName];
           if (el.constraint === 'required') {
             return i;
           }
           if (el.constraint === 'minLength') {
             return `${i} no mínimo ${el.minLength} caracteres`;
+          }
+          if (el.constraint === 'minItems') {
+            const correctWord = el.minLength > 1 ? 'items' : 'item';
+            return `${i} no mínimo ${el.minItems} ${correctWord}`;
           }
           if (el.constraint === 'maxLength') {
             return `${i} no máximo ${el.maxLength} caracteres`;
