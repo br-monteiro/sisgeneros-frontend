@@ -20,4 +20,20 @@ const removeUser = () => {
 
 const getDataUser = () => fn.getLocalStorage('dataUser');
 
-export default { isLoggedIn, registerUser, getDataUser, removeUser };
+const getDefaultUserOmId = () => {
+  let currentOm = fn.getLocalStorage('currentOm');
+  if (currentOm.id) {
+    return currentOm.id;
+  }
+  try {
+    const omId = getDataUser().userProfile.find(i => i.default === 'yes').militaryOrganizationId;
+    currentOm = parseInt(omId, 10);
+  } catch (e) {
+    console.error(`Error: ${e}`);
+    currentOm = 0;
+  }
+  fn.setLocalStorage('currentOm', { id: currentOm });
+  return currentOm;
+};
+
+export default { isLoggedIn, registerUser, getDataUser, removeUser, getDefaultUserOmId };
