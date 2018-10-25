@@ -2,7 +2,7 @@
   <div>
     <div class="x_panel">
       <div class="x_title">
-        <h2>{{boxtitle}}</h2>
+        <h4>{{boxtitle}}</h4>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
