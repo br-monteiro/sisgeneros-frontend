@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{`${baseUrl}${url}`}}
     <input-text
       v-model="value"
       v-bind:label="label"
