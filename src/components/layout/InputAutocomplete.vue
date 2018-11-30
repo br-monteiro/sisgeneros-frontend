@@ -79,6 +79,7 @@ export default {
       this.results = [];
     },
     timeoutNoResults() {
+      this.results = [];
       this.noResults = true;
       setTimeout(() => {
         this.noResults = false;
