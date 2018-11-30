@@ -53,6 +53,16 @@
                         <li><a href="/#/receitas/new">Registrar</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a>
+                        <i class="fa fa-user"></i> Usuários
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                    <ul class="nav child_menu">
+                        <li><a href="/#/usuarios">Listar</a></li>
+                        <li><a href="/#/usuarios/new">Registrar</a></li>
+                    </ul>
+                </li>
                 <!--
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
