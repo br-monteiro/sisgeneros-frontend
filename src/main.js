@@ -11,11 +11,23 @@ import 'v-slim-dialog/dist/v-slim-dialog.css';
 import './build-gentelella/js/custom';
 import App from './App';
 import router from './router';
+import Dictionary from './common/Dictionary';
 
 Vue.config.productionTip = false;
 Vue.use(VueMask);
 Vue.use(SlimDialog);
 Vue.use(VueAxios, axios);
+
+/**
+ * Adding filter translate
+ */
+Vue.filter('translate', (value) => {
+  const selectedWord = Dictionary.filter(i => i.from === value)[0];
+  if (selectedWord) {
+    return selectedWord.to;
+  }
+  return value;
+});
 
 require('bootstrap/dist/css/bootstrap.min.css');
 require('gentelella/vendors/font-awesome/css/font-awesome.min.css');
