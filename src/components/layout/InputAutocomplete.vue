@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     getView(el) {
-      return el && el[this.pathtoview] || '';
+      return (el && el[this.pathtoview]) || '';
     },
     selectElement(el) {
       if (el && typeof this.cbselect === 'function') {
@@ -71,7 +71,7 @@ export default {
             this.timeoutNoResults();
           }
         })
-        .catch((response) => {
+        .catch(() => {
           this.timeoutNoResults();
         });
     },

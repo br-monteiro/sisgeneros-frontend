@@ -138,28 +138,28 @@ export default {
     },
     saveProvile() {
       this.axios.put(`${baseUrl}users/${this.$route.params.id}/oms`, {
-          militaryOrganizationsId: parseInt(this.selected.id, 10),
-          profile: this.selectedProfile,
+        militaryOrganizationsId: parseInt(this.selected.id, 10),
+        profile: this.selectedProfile,
+      })
+        .then((response) => {
+          // deactivating progress bar
+          this.progress = false;
+          this.results = response.data.data;
+          this.selected = {};
+          this.selectedProfile = '';
+          this.dialog('Perfil adicionado com sucesso');
+          this.updateUserProfile();
         })
-          .then((response) => {
-            // deactivating progress bar
-            this.progress = false;
-            this.results = response.data.data;
-            this.selected = {};
-            this.selectedProfile = '';
-            this.dialog('Perfil adicionado com sucesso');
-            this.updateUserProfile();
-          })
-          .catch((response) => {
-            // deactivating progress bar
-            this.progress = false;
-            if (response.response && response.response.status === 404) {
-              this.$router.push('/usuarios');
-            }
-          });
+        .catch((response) => {
+          // deactivating progress bar
+          this.progress = false;
+          if (response.response && response.response.status === 404) {
+            this.$router.push('/usuarios');
+          }
+        });
     },
     updateUserProfile() {
-      if (Authenticator.getDataUser().userId === parseInt(this.$route.params.id)) {
+      if (Authenticator.getDataUser().userId === parseInt(this.$route.params.id, 10)) {
         Authenticator.updateUserProfile(this.results);
       }
     },
@@ -204,25 +204,25 @@ export default {
     changeDefaut(value) {
       if (value.default === 'no') {
         this.axios.put(`${baseUrl}users/${this.$route.params.id}/${value.id}/oms/changedefault`, {
-            militaryOrganizationsId: parseInt(value.id, 10),
-            profile: value.profile,
+          militaryOrganizationsId: parseInt(value.id, 10),
+          profile: value.profile,
+        })
+          .then((response) => {
+            // deactivating progress bar
+            this.progress = false;
+            this.results = response.data.data;
+            this.dialog('OM principal alterada com sucesso.');
+            this.updateUserProfile();
           })
-            .then((response) => {
-              // deactivating progress bar
-              this.progress = false;
-              this.results = response.data.data;
-              this.dialog('OM principal alterada com sucesso.');
-              this.updateUserProfile();
-            })
-            .catch((response) => {
-              // deactivating progress bar
-              this.progress = false;
-              if (response.response && response.response.status === 404) {
-                this.$router.push('/usuarios');
-              }
-            });
+          .catch((response) => {
+            // deactivating progress bar
+            this.progress = false;
+            if (response.response && response.response.status === 404) {
+              this.$router.push('/usuarios');
+            }
+          });
       }
-    }
+    },
   },
 };
 </script>
