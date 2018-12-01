@@ -36,4 +36,19 @@ const getDefaultUserOmId = () => {
   return currentOm;
 };
 
-export default { isLoggedIn, registerUser, getDataUser, removeUser, getDefaultUserOmId };
+const updateUserProfile = (values) => {
+  if (Array.isArray(values)) {
+    const dataUser = getDataUser();
+    dataUser.userProfile = values.map((el) => {
+      const obj = {
+        profile: el.profile,
+        default: el.default,
+        militaryOrganizationId: el.id,
+      };
+      return obj;
+    });
+    fn.setLocalStorage('dataUser', dataUser);
+  }
+};
+
+export default { isLoggedIn, registerUser, getDataUser, removeUser, getDefaultUserOmId, updateUserProfile };
