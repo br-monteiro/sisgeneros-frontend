@@ -22,7 +22,7 @@
               <th>{{result.active | translate}}</th>
               <th v-html="om(result.militaryOrganizations)"></th>
               <th>
-                <button class="btn btn-xs btn-info" @click="goTo" v-bind:data-url="`/usuarios/edit/${result.id}/oms`">
+                <button class="btn btn-xs btn-info" @click="goTo(`/usuarios/edit/${result.id}/oms`)">
                   <i class="fa fa-university"></i>
                 </button>
                 <button class="btn btn-xs btn-success" @click="edit(result.id)">
@@ -140,15 +140,13 @@ export default {
     },
     om(value) {
       if (Array.isArray(value)) {
-        return value.map(i => i.name).join('<br>');
+        return value.map(i => i.navalIndicative).join('<br>');
       }
       return value;
     },
-    goTo(event) {
-      event.preventDefault();
-      const el = event.target;
-      if (el.dataset.url) {
-        this.$router.push(el.dataset.url);
+    goTo(url) {
+      if (url) {
+        this.$router.push(url);
       }
     },
   },
