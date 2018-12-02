@@ -49,7 +49,7 @@ import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
 import NavigationButtons from '../layout/NavigationButtons';
 
-const baseUrl = Configurations.BASE_URL_PAI;
+const baseUrl = Configurations.BASE_URL_API;
 
 export default {
   name: 'usersList',

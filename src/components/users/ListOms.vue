@@ -88,7 +88,7 @@ import BoxContent from '../layout/BoxContent';
 import InputText from '../layout/InputText';
 import InputAutocomplete from '../layout/InputAutocomplete';
 
-const baseUrl = Configurations.BASE_URL_PAI;
+const baseUrl = Configurations.BASE_URL_API;
 
 export default {
   name: 'usersListOms',

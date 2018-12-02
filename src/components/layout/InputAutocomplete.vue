@@ -33,7 +33,7 @@ export default {
   ],
   data() {
     return {
-      baseUrl: Configurations.BASE_URL_PAI,
+      baseUrl: Configurations.BASE_URL_API,
       noResults: false,
       results: [],
       value: '',

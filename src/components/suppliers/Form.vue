@@ -50,7 +50,7 @@ import BoxContent from '../layout/BoxContent';
 import schemaMessage from './schemaMessage';
 import error from '../../common/DialogError';
 
-const baseUrl = Configurations.BASE_URL_PAI;
+const baseUrl = Configurations.BASE_URL_API;
 
 export default {
   name: 'suppliersForm',
