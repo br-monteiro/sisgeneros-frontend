@@ -29,9 +29,21 @@ Vue.filter('translate', (value) => {
   return value;
 });
 
+/**
+ * Adding filter translate
+ */
+Vue.filter('truncate', (value, limit = 15) => {
+  let v = value;
+  if (v && v.length > limit) {
+    v = v.substring(0, limit);
+    v += '...';
+  }
+  return v;
+});
+
 require('bootstrap/dist/css/bootstrap.min.css');
 require('gentelella/vendors/font-awesome/css/font-awesome.min.css');
-require('gentelella/vendors/nprogress/nprogress.css');
+// require('gentelella/vendors/nprogress/nprogress.css');
 require('./build-gentelella/css/custom.css');
 
 /* eslint-disable no-new */
