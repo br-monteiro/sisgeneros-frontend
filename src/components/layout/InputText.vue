@@ -23,6 +23,8 @@
         v-bind:value="value"
         v-bind:placeholder="placeholder"
         v-on:input="updateValue($event.target.value)">
+
+        <slot></slot>
     </div>
   </div>
 </template>

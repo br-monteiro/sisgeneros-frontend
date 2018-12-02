@@ -4,12 +4,12 @@
       v-model="value"
       v-bind:label="label"
       v-bind:value="value"
-      v-bind:placeholder="placeholder"
-    />
-    <ul class="list-group list" v-bind:style="css">
-      <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
-      <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result)">{{getView(result)}}</li>
-    </ul>
+      v-bind:placeholder="placeholder">
+      <ul class="list-group list" v-bind:style="css">
+        <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
+        <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result)">{{getView(result)}}</li>
+      </ul>
+    </input-text>
   </div>
 </template>
 
@@ -99,7 +99,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .list {
-  width: 300px;
+  width: inherit;
+  margin-top: 40px;
   position: absolute;
   z-index: 999;
 }
