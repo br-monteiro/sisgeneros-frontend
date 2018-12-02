@@ -7,7 +7,7 @@
       v-bind:placeholder="placeholder">
       <ul class="list-group list" v-bind:style="css">
         <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
-        <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result)">{{getView(result)}}</li>
+        <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result, $event)">{{getView(result)}}</li>
       </ul>
     </input-text>
   </div>
@@ -55,10 +55,10 @@ export default {
     getView(el) {
       return (el && el[this.pathtoview]) || '';
     },
-    selectElement(el) {
+    selectElement(el, event) {
       if (el && typeof this.cbselect === 'function') {
         const cb = this.cbselect;
-        cb(el);
+        cb(el, event);
         this.clear();
       }
     },
