@@ -187,7 +187,7 @@ export default {
   name: 'menu-right',
   data() {
     return {
-        baseUrl: Configurations.BASE_URL_APP,
+      baseUrl: Configurations.BASE_URL_APP,
     };
   },
 };
