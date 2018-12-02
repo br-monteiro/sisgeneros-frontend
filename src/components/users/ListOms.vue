@@ -10,8 +10,7 @@
             pathtoview="name"
             auth="true"
             v-bind:url="`users/autocomplete/oms`"
-            v-bind:cbselect="select"
-            css="margin-left: 25%;" />
+            v-bind:cbselect="select" />
           <span v-if="selected.id">
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">
