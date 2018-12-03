@@ -1,8 +1,8 @@
 <template>
   <div>
-    <template-default pgtitle="Refeições">
+    <template-default pgtitle="OMs">
       <loaging-bar v-show="progress"></loaging-bar>
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de refeições">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de OMs">
         <table class="table">
           <thead>
             <tr>

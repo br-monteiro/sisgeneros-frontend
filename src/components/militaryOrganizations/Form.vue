@@ -1,8 +1,8 @@
 <template>
   <div>
-    <template-default pgtitle="Refeições">
+    <template-default pgtitle="OMs">
       <loaging-bar v-show="progress" />
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de refeições">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Formulário de OMs">
         <form id="demo-form2" class="form-horizontal form-label-left">
           <input-text label="Nome" required="true" v-model="name" />
           <input-text label="Indicativo Naval" required="true" v-model="navalIndicative" maxlength="6" />
