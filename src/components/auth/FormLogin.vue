@@ -32,7 +32,7 @@ import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
 import LoadingBar from '../layout/LoadingBar';
 
-const baseUrl = Configurations.BASE_URL_PAI;
+const baseUrl = Configurations.BASE_URL_API;
 
 export default {
   name: 'form-login',

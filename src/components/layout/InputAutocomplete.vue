@@ -4,12 +4,12 @@
       v-model="value"
       v-bind:label="label"
       v-bind:value="value"
-      v-bind:placeholder="placeholder"
-    />
-    <ul class="list-group list" v-bind:style="css">
-      <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
-      <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result)">{{getView(result)}}</li>
-    </ul>
+      v-bind:placeholder="placeholder">
+      <ul class="list-group list" v-bind:style="css">
+        <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
+        <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result, $event)">{{getView(result)}}</li>
+      </ul>
+    </input-text>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ export default {
   ],
   data() {
     return {
-      baseUrl: Configurations.BASE_URL_PAI,
+      baseUrl: Configurations.BASE_URL_API,
       noResults: false,
       results: [],
       value: '',
@@ -55,10 +55,10 @@ export default {
     getView(el) {
       return (el && el[this.pathtoview]) || '';
     },
-    selectElement(el) {
+    selectElement(el, event) {
       if (el && typeof this.cbselect === 'function') {
         const cb = this.cbselect;
-        cb(el);
+        cb(el, event);
         this.clear();
       }
     },
@@ -66,6 +66,7 @@ export default {
       this.axios.get(`${this.baseUrl}${this.url}?limit=50&query=${v}`)
         .then((response) => {
           if (response.data.data.length) {
+            this.noResults = false;
             this.results = response.data.data;
           } else {
             this.timeoutNoResults();
@@ -90,6 +91,8 @@ export default {
     value(v) {
       if (v && v.length > 3) {
         this.search(v);
+      } else {
+        this.clear();
       }
     },
   },
@@ -99,7 +102,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .list {
-  width: 300px;
+  width: inherit;
+  margin-top: 40px;
   position: absolute;
   z-index: 999;
 }

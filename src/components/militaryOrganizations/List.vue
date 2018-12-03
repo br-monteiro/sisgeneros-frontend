@@ -1,27 +1,32 @@
 <template>
   <div>
-    <template-default pgtitle="Fornecedores">
+    <template-default pgtitle="Refeições">
       <loaging-bar v-show="progress"></loaging-bar>
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de fornecedores">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de refeições">
         <table class="table">
           <thead>
             <tr>
+              <th></th>
               <th>Nome</th>
-              <th>CNPJ</th>
-              <th>Detalhes</th>
+              <th>UASG</th>
+              <th>CeIM</th>
+              <th>Ag. Fiscal</th>
+              <th>Fiel Munic.</th>
+              <th>Ges. Munic.</th>
+              <th>Paioleiro</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="result in results" v-bind:key="result.id">
-              <th>{{result.name}}</th>
-              <th>{{result.cnpj}}</th>
-              <th>
-                <button class="btn btn-xs btn-default" @click="dialog(result.contacts)">
-                  <i class="fa fa-info-circle"></i>
-                </button>
-                {{result.contacts.substr(0, 15)}}
-              </th>
+              <th>{{result.navalIndicative}}</th>
+              <th>{{result.name | truncate}}</th>
+              <th>{{result.uasgNumber}}</th>
+              <th>{{result.isCeim | translate}}</th>
+              <th>{{result.fiscalAgent | truncate}}</th>
+              <th>{{result.munitionFiel | truncate}}</th>
+              <th>{{result.munitionManager | truncate}}</th>
+              <th>{{result.stockManager | truncate}}</th>
               <th>
                 <button class="btn btn-xs btn-info" @click="edit(result.id)">
                   <i class="fa fa-edit"></i>
@@ -33,7 +38,7 @@
             </tr>
           </tbody>
         </table>
-        <navigation-buttons v-bind:total="allResults" url="/#/refeicoes" v-bind:current="current" />
+        <navigation-buttons v-bind:total="allResults" v-bind:url="`${url}/#/oms`" v-bind:current="current" />
       </box-content>
     </template-default>
   </div>
@@ -50,7 +55,7 @@ import NavigationButtons from '../layout/NavigationButtons';
 const baseUrl = Configurations.BASE_URL_API;
 
 export default {
-  name: 'suppliersList',
+  name: 'militaryOrganizationsList',
   components: {
     TemplateDefault,
     LoagingBar,
@@ -65,6 +70,7 @@ export default {
       allResults: 0,
       maxPerPage: 50,
       current: 1,
+      url: Configurations.BASE_URL_APP,
     };
   },
   created() {
@@ -84,7 +90,7 @@ export default {
   },
   methods: {
     edit(id) {
-      this.$router.push(`/fornecedores/edit/${id}`);
+      this.$router.push(`/oms/edit/${id}`);
     },
     fecthData(page) {
       let parsedPag = parseInt(page, 10);
@@ -105,7 +111,7 @@ export default {
       // active progress bar
       this.progress = true;
       // getting data
-      this.axios.get(`${baseUrl}suppliers?limit=${this.maxPerPage}&offset=${parsedPag}`)
+      this.axios.get(`${baseUrl}militaryorganizations?limit=${this.maxPerPage}&offset=${parsedPag}`)
         .then((response) => {
           // deactivating progress bar
           this.progress = false;
@@ -122,7 +128,7 @@ export default {
       // active progress bar
       this.progress = true;
 
-      this.axios.delete(`${baseUrl}suppliers/${id}`)
+      this.axios.delete(`${baseUrl}militaryorganizations/${id}`)
         .then((response) => {
           if (response.status === 204) {
             // deactivating progress bar
@@ -135,10 +141,6 @@ export default {
           this.progress = false;
           console.error(response);
         });
-    },
-    dialog(message) {
-      const options = { size: 'lg' };
-      this.$dialogs.alert(message, options);
     },
   },
 };

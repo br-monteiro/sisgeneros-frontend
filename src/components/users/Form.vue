@@ -13,7 +13,7 @@
             <input-text label="Senha" required="true" v-model="password" />
           </div>
 
-          <div class="form-group">
+          <div class="form-group" v-if="!isCreating">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-active">
               Ativo <span class="required">*</span>
             </label>
@@ -47,7 +47,7 @@ import BoxContent from '../layout/BoxContent';
 import schemaMessage from './schemaMessage';
 import error from '../../common/DialogError';
 
-const baseUrl = Configurations.BASE_URL_PAI;
+const baseUrl = Configurations.BASE_URL_API;
 
 export default {
   name: 'usersForm',

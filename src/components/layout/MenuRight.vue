@@ -3,7 +3,7 @@
     <div class="col-md-3 left_col menu_fixed">
         <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="/#/" class="site_title">
+            <a v-bind:href="`${baseUrl}#/`" class="site_title">
                 <i class="fa fa-group"></i>
                 <span>SisGêneros</span>
             </a>
@@ -19,7 +19,7 @@
             <h3>Geral</h3>
             <ul class="nav side-menu">
                 <li>
-                    <a href="/#/">
+                    <a v-bind:href="`${baseUrl}#/`">
                         <i class="fa fa-home"></i> Home
                     </a>
                 </li>
@@ -29,8 +29,8 @@
                         <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="nav child_menu">
-                        <li><a href="/#/refeicoes">Listar</a></li>
-                        <li><a href="/#/refeicoes/new">Registrar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/refeicoes`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/refeicoes/new`">Registrar</a></li>
                     </ul>
                 </li>
                 <li>
@@ -39,8 +39,8 @@
                         <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="nav child_menu">
-                        <li><a href="/#/fornecedores">Listar</a></li>
-                        <li><a href="/#/fornecedores/new">Registrar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/fornecedores`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/fornecedores/new`">Registrar</a></li>
                     </ul>
                 </li>
                 <li>
@@ -49,8 +49,8 @@
                         <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="nav child_menu">
-                        <li><a href="/#/receitas">Listar</a></li>
-                        <li><a href="/#/receitas/new">Registrar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/receitas`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/receitas/new`">Registrar</a></li>
                     </ul>
                 </li>
                 <li>
@@ -59,8 +59,18 @@
                         <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="nav child_menu">
-                        <li><a href="/#/usuarios">Listar</a></li>
-                        <li><a href="/#/usuarios/new">Registrar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/usuarios`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/usuarios/new`">Registrar</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-university"></i> OMs
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                    <ul class="nav child_menu">
+                        <li><a v-bind:href="`${baseUrl}#/oms`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/oms/new`">Registrar</a></li>
                     </ul>
                 </li>
                 <!--
@@ -181,10 +191,14 @@
 </template>
 
 <script>
+import Configurations from '../../common/Configurations';
+
 export default {
   name: 'menu-right',
   data() {
-    return {};
+    return {
+      baseUrl: Configurations.BASE_URL_APP,
+    };
   },
 };
 </script>
