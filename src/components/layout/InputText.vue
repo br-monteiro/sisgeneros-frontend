@@ -11,6 +11,7 @@
         required="required"
         class="form-control col-md-7 col-xs-12"
         v-if="required"
+        v-bind:disabled="readonly"
         v-bind:value="value"
         v-bind:placeholder="placeholder"
         v-on:input="updateValue($event.target.value)">
@@ -20,6 +21,7 @@
         id="input-id"
         class="form-control col-md-7 col-xs-12"
         v-if="!required"
+        v-bind:disabled="readonly"
         v-bind:value="value"
         v-bind:placeholder="placeholder"
         v-on:input="updateValue($event.target.value)">
@@ -32,7 +34,7 @@
 <script>
 export default {
   name: 'input-text',
-  props: ['label', 'required', 'placeholder', 'value'],
+  props: ['label', 'required', 'placeholder', 'value', 'readonly'],
   data() {
     return {};
   },
