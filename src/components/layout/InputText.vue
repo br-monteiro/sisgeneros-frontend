@@ -11,6 +11,7 @@
         required="required"
         class="form-control col-md-7 col-xs-12"
         v-if="required"
+        v-mask="pattern"
         v-bind:maxlength="maxlength"
         v-bind:disabled="readonly"
         v-bind:value="value"
@@ -22,6 +23,7 @@
         id="input-id"
         class="form-control col-md-7 col-xs-12"
         v-if="!required"
+        v-mask="pattern"
         v-bind:maxlength="maxlength"
         v-bind:disabled="readonly"
         v-bind:value="value"
@@ -43,15 +45,23 @@ export default {
     'value',
     'readonly',
     'maxlength',
+    'mask',
   ],
   data() {
-    return {};
+    return {
+      pattern: '',
+    };
   },
   methods: {
     updateValue(v) {
       this.$emit('input', v);
     },
   },
+  created() {
+    if (this.mask) {
+      this.pattern = this.mask;
+    }
+  }
 };
 </script>
 
