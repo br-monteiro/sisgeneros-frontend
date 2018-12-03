@@ -61,7 +61,7 @@ export default {
     if (this.mask) {
       this.pattern = this.mask;
     }
-  }
+  },
 };
 </script>
 
