@@ -40,6 +40,9 @@ const dialog = (component, rawResponse, schemaMessage) => {
           if (el.constraint === 'minimum') {
             return `${i} deve ser no mínimo ${el.minimum}`;
           }
+          if (el.constraint === 'maximum') {
+            return `${i} deve ser no máximo ${el.maximum}`;
+          }
           return '';
         }).join(', ');
         component.dialog(msg);
