@@ -116,7 +116,6 @@ export default {
   data() {
     return {
       progress: false,
-      sort: 1,
       id: null,
       dataUser: {},
       name: '',
