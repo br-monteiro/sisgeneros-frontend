@@ -63,6 +63,16 @@
                         <li><a v-bind:href="`${baseUrl}#/usuarios/new`">Registrar</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a>
+                        <i class="fa fa-university"></i> OMs
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                    <ul class="nav child_menu">
+                        <li><a v-bind:href="`${baseUrl}#/oms`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/oms/new`">Registrar</a></li>
+                    </ul>
+                </li>
                 <!--
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
