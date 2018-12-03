@@ -90,6 +90,8 @@ export default {
     value(v) {
       if (v && v.length > 3) {
         this.search(v);
+      } else {
+        this.clear();
       }
     },
   },
