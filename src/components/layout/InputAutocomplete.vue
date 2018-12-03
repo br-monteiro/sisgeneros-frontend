@@ -66,6 +66,7 @@ export default {
       this.axios.get(`${this.baseUrl}${this.url}?limit=50&query=${v}`)
         .then((response) => {
           if (response.data.data.length) {
+            this.noResults = false;
             this.results = response.data.data;
           } else {
             this.timeoutNoResults();
