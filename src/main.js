@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import SlimDialog from 'v-slim-dialog';
 import VueMask from 'v-mask';
+import VMoney from 'v-money';
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap.min';
 // import 'gentelella/vendors/fastclick/lib/fastclick';
@@ -15,6 +16,14 @@ import Dictionary from './common/Dictionary';
 
 Vue.config.productionTip = false;
 Vue.use(VueMask);
+Vue.use(VMoney, {
+  decimal: ',',
+  thousands: '.',
+  prefix: 'R$ ',
+  suffix: '',
+  precision: 2,
+  masked: false,
+});
 Vue.use(SlimDialog);
 Vue.use(VueAxios, axios);
 
