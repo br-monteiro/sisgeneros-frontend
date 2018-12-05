@@ -43,10 +43,23 @@ const dialog = (component, rawResponse, schemaMessage) => {
           if (el.constraint === 'maximum') {
             return `${i} deve ser no máximo ${el.maximum}`;
           }
+          if (el.constraint === 'pattern') {
+            const patternMessage = schemaMessage.maps[`__${propertyName}`];
+            let m = `${i} está fora do padrão`;
+            if (m) {
+              m = `${m}. ${patternMessage}`;
+            }
+            return m;
+          }
           return '';
         }).join(', ');
         component.dialog(msg);
       }
+    }
+
+    // mensagens para redistros duplicados
+    if (httpCode === 400 && typeof component.dialog === 'function' && message === 'A record with this data already exists') {
+      component.dialog('Já existe registro com estes dados');
     }
 
     // mensagens para duplicidade de registro
