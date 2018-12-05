@@ -2,7 +2,7 @@
   <div>
     <template-default pgtitle="Refeições">
       <loaging-bar v-show="progress" />
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de refeições">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Formulário de refeições">
         <form id="demo-form2" class="form-horizontal form-label-left">
           <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span>
