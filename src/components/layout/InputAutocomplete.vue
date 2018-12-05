@@ -53,6 +53,10 @@ export default {
   },
   methods: {
     getView(el) {
+      if (typeof this.pathtoview === 'function') {
+        const cb = this.pathtoview;
+        return cb(el) || '';
+      }
       return (el && el[this.pathtoview]) || '';
     },
     selectElement(el, event) {
