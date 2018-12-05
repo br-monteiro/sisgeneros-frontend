@@ -9,6 +9,7 @@ import suppliers from './suppliers';
 import recipes from './recipes';
 import users from './users';
 import militaryOrganizations from './militaryOrganizations';
+import biddings from './biddings';
 
 Vue.use(Router);
 
@@ -20,6 +21,7 @@ routes = RouterFunctions.routerConcat(routes, suppliers);
 routes = RouterFunctions.routerConcat(routes, recipes);
 routes = RouterFunctions.routerConcat(routes, users);
 routes = RouterFunctions.routerConcat(routes, militaryOrganizations);
+routes = RouterFunctions.routerConcat(routes, biddings);
 
 export default new Router({
   routes,
