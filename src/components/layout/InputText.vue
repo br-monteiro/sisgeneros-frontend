@@ -1,13 +1,12 @@
 <template>
   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="input-id">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
       {{label}}
       <span class="required" v-if="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input
         type="text"
-        id="input-id"
         required="required"
         class="form-control col-md-7 col-xs-12"
         v-if="required"
@@ -20,7 +19,6 @@
 
       <input
         type="text"
-        id="input-id"
         class="form-control col-md-7 col-xs-12"
         v-if="!required"
         v-mask="pattern"
