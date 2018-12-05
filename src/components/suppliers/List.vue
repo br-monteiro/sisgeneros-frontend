@@ -20,7 +20,7 @@
                 <button class="btn btn-xs btn-default" @click="dialog(result.contacts)">
                   <i class="fa fa-info-circle"></i>
                 </button>
-                {{result.contacts.substr(0, 15)}}
+                {{result.contacts | truncate(15)}}
               </th>
               <th>
                 <button class="btn btn-xs btn-info" @click="edit(result.id)">
