@@ -3,6 +3,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import SlimDialog from 'v-slim-dialog';
 import VueMask from 'v-mask';
+import VMoney from 'v-money';
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap.min';
 // import 'gentelella/vendors/fastclick/lib/fastclick';
@@ -15,6 +16,14 @@ import Dictionary from './common/Dictionary';
 
 Vue.config.productionTip = false;
 Vue.use(VueMask);
+Vue.use(VMoney, {
+  decimal: ',',
+  thousands: '.',
+  prefix: 'R$ ',
+  suffix: '',
+  precision: 2,
+  masked: false,
+});
 Vue.use(SlimDialog);
 Vue.use(VueAxios, axios);
 
@@ -37,6 +46,32 @@ Vue.filter('truncate', (value, limit = 15) => {
   if (v && v.length > limit) {
     v = v.substring(0, limit);
     v += '...';
+  }
+  return v;
+});
+
+/**
+ * Adding filter date
+ */
+Vue.filter('date', (value, separator = '-') => {
+  let v = value;
+  if (v) {
+    v = v.split('-').reverse().join(separator);
+  }
+  return v;
+});
+
+/**
+ * Adding filter money
+ */
+Vue.filter('money', (value, symbol = 'R$') => {
+  let v = value;
+  const parsedValue = parseFloat(value);
+
+  if (v && parsedValue) {
+    v = parsedValue.toLocaleString('pt-BR');
+    v += !/,\d{2,}/.test(v) ? '0' : '';
+    v = `${symbol} ${v}`;
   }
   return v;
 });

@@ -2,7 +2,7 @@
   <div>
     <template-default pgtitle="Receitas">
       <loaging-bar v-show="progress" />
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de receitas">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Formulário de receitas">
         <form id="demo-form2" class="form-horizontal form-label-left">
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

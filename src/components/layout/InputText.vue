@@ -1,16 +1,16 @@
 <template>
   <div class="form-group">
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="input-id">
+    <label class="control-label col-md-3 col-sm-3 col-xs-12">
       {{label}}
       <span class="required" v-if="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
       <input
         type="text"
-        id="input-id"
         required="required"
         class="form-control col-md-7 col-xs-12"
         v-if="required"
+        v-mask="pattern"
         v-bind:maxlength="maxlength"
         v-bind:disabled="readonly"
         v-bind:value="value"
@@ -19,9 +19,9 @@
 
       <input
         type="text"
-        id="input-id"
         class="form-control col-md-7 col-xs-12"
         v-if="!required"
+        v-mask="pattern"
         v-bind:maxlength="maxlength"
         v-bind:disabled="readonly"
         v-bind:value="value"
@@ -43,14 +43,22 @@ export default {
     'value',
     'readonly',
     'maxlength',
+    'mask',
   ],
   data() {
-    return {};
+    return {
+      pattern: '',
+    };
   },
   methods: {
     updateValue(v) {
       this.$emit('input', v);
     },
+  },
+  created() {
+    if (this.mask) {
+      this.pattern = this.mask;
+    }
   },
 };
 </script>

@@ -1,33 +1,35 @@
 <template>
-  <div>
-    <input-text
+  <div class="input-group">
+    <input type="text"
+      class="form-control"
       v-model="value"
-      v-bind:label="label"
-      v-bind:value="value"
       v-bind:placeholder="placeholder">
-      <ul class="list-group list" v-bind:style="css">
-        <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
-        <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result, $event)">{{getView(result)}}</li>
-      </ul>
-    </input-text>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="button" @click="btnClick(value, $event)">
+        <i class="fa fa-search"></i>
+      </button>
+    </span>
+    <ul class="list-group list" v-bind:style="css">
+      <li class="list-group-item list-group-item-danger" v-if="noResults">Sem resultados</li>
+      <li class="list-group-item item" v-for="result in results" v-bind:key="result.id" @click="selectElement(result, $event)">{{getView(result)}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
-import InputText from './InputText';
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
 
 export default {
-  name: 'input-autocomplete',
+  name: 'search-on-top',
   props: [
-    'label',
     'required',
     'placeholder',
-    'url',
     'usefullpath',
     'pathtoview',
     'cbselect',
+    'cbclick',
+    'url',
     'css',
     'auth',
   ],
@@ -39,9 +41,7 @@ export default {
       value: '',
     };
   },
-  components: {
-    InputText,
-  },
+  components: {},
   created() {
     if (this.usefullpath) {
       this.baseUrl = '';
@@ -64,6 +64,12 @@ export default {
         const cb = this.cbselect;
         cb(el, event);
         this.clear();
+      }
+    },
+    btnClick(el, event) {
+      if (typeof this.cbclick === 'function') {
+        const cb = this.cbclick;
+        cb(el, event, this);
       }
     },
     search(v) {
@@ -106,8 +112,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .list {
-  width: inherit;
-  margin-top: 40px;
+  width: 230px;
+  margin-top: 35px;
+  margin-left: -236px;
   position: absolute;
   z-index: 999;
 }

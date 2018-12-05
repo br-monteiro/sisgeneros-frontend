@@ -9,7 +9,7 @@
             placeholder="Nome da OM, Indicativo Naval ou UASG"
             pathtoview="name"
             auth="true"
-            v-bind:url="`users/autocomplete/oms`"
+            url="users/autocomplete/oms"
             v-bind:cbselect="select" />
           <span v-if="selected.id">
             <div class="form-group">

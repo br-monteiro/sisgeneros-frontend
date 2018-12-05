@@ -7,7 +7,7 @@
           <input-text label="Nome de Guerra" required="true" v-model="name" />
           <input-text label="Nome completo" required="true" v-model="fullName" />
           <input-text label="Posto/Graduação" required="true" v-model="militaryPost" />
-          <input-text label="NIP" required="true" v-mask="'##.####.##'" v-model="nip" />
+          <input-text label="NIP" required="true" mask="##.####.##" v-model="nip" />
           <div v-if="isCreating">
             <input-text label="Usuário" required="true" v-model="username" />
             <input-text label="Senha" required="true" v-model="password" />

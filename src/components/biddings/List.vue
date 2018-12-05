@@ -1,33 +1,30 @@
 <template>
   <div>
-    <template-default pgtitle="OMs">
+    <template-default pgtitle="Licitações">
       <loaging-bar v-show="progress"></loaging-bar>
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de OMs">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de Licitações">
         <table class="table">
           <thead>
             <tr>
-              <th></th>
-              <th>Nome</th>
+              <th>Número</th>
+              <th>Ano</th>
               <th>UASG</th>
-              <th>CeIM</th>
-              <th>Ag. Fiscal</th>
-              <th>Fiel Munic.</th>
-              <th>Ges. Munic.</th>
-              <th>Paioleiro</th>
+              <th>Órgão</th>
+              <th>Validade</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="result in results" v-bind:key="result.id">
-              <th>{{result.navalIndicative}}</th>
-              <th>{{result.name | truncate}}</th>
+              <th>{{result.number}}</th>
+              <th>{{result.year}}</th>
               <th>{{result.uasgNumber}}</th>
-              <th>{{result.isCeim | translate}}</th>
-              <th>{{result.fiscalAgent | truncate}}</th>
-              <th>{{result.munitionFiel | truncate}}</th>
-              <th>{{result.munitionManager | truncate}}</th>
-              <th>{{result.stockManager | truncate}}</th>
+              <th>{{result.uasgName | translate}}</th>
+              <th>{{result.validate | date}}</th>
               <th>
+                <button class="btn btn-xs btn-warning" @click="goTo(`licitacoes/edit/${result.id}/itens`)">
+                  <i class="fa fa-list"></i>
+                </button>
                 <button class="btn btn-xs btn-info" @click="edit(result.id)">
                   <i class="fa fa-edit"></i>
                 </button>
@@ -38,7 +35,7 @@
             </tr>
           </tbody>
         </table>
-        <navigation-buttons v-bind:total="allResults" v-bind:url="`${url}/#/oms`" v-bind:current="current" />
+        <navigation-buttons v-bind:total="allResults" v-bind:url="`${url}/#/licitacoes`" v-bind:current="current" />
       </box-content>
     </template-default>
   </div>
@@ -55,7 +52,7 @@ import NavigationButtons from '../layout/NavigationButtons';
 const baseUrl = Configurations.BASE_URL_API;
 
 export default {
-  name: 'militaryOrganizationsList',
+  name: 'biddings',
   components: {
     TemplateDefault,
     LoagingBar,
@@ -90,7 +87,7 @@ export default {
   },
   methods: {
     edit(id) {
-      this.$router.push(`/oms/edit/${id}`);
+      this.$router.push(`/licitacoes/edit/${id}`);
     },
     fecthData(page) {
       let parsedPag = parseInt(page, 10);
@@ -111,7 +108,7 @@ export default {
       // active progress bar
       this.progress = true;
       // getting data
-      this.axios.get(`${baseUrl}militaryorganizations?limit=${this.maxPerPage}&offset=${parsedPag}`)
+      this.axios.get(`${baseUrl}biddings?limit=${this.maxPerPage}&offset=${parsedPag}`)
         .then((response) => {
           // deactivating progress bar
           this.progress = false;
@@ -128,7 +125,7 @@ export default {
       // active progress bar
       this.progress = true;
 
-      this.axios.delete(`${baseUrl}militaryorganizations/${id}`)
+      this.axios.delete(`${baseUrl}biddings/${id}`)
         .then((response) => {
           if (response.status === 204) {
             // deactivating progress bar
@@ -141,6 +138,11 @@ export default {
           this.progress = false;
           console.error(response);
         });
+    },
+    goTo(url) {
+      if (url) {
+        this.$router.push(url);
+      }
     },
   },
 };
