@@ -41,6 +41,32 @@ Vue.filter('truncate', (value, limit = 15) => {
   return v;
 });
 
+/**
+ * Adding filter date
+ */
+Vue.filter('date', (value, separator = '-') => {
+  let v = value;
+  if (v) {
+    v = v.split('-').reverse().join(separator);
+  }
+  return v;
+});
+
+/**
+ * Adding filter money
+ */
+Vue.filter('money', (value, symbol = 'R$') => {
+  let v = value;
+  const parsedValue = parseFloat(value);
+
+  if (v && parsedValue) {
+    v = parsedValue.toLocaleString('pt-BR');
+    v += !/,\d{2,}/.test(v) ? '0' : '';
+    v = `${symbol} ${v}`;
+  }
+  return v;
+});
+
 require('bootstrap/dist/css/bootstrap.min.css');
 require('gentelella/vendors/font-awesome/css/font-awesome.min.css');
 // require('gentelella/vendors/nprogress/nprogress.css');
