@@ -146,7 +146,7 @@ export default {
           this.results = response.data.data;
           this.selected = {};
           this.selectedProfile = '';
-          this.dialog('Perfil adicionado com sucesso');
+          this.dialog('Perfil adicionado com sucesso. Para que esse perfil seja usado é necessário deslogar do sistema.');
           this.updateUserProfile();
         })
         .catch((response) => {
@@ -159,7 +159,7 @@ export default {
     },
     updateUserProfile() {
       if (Authenticator.getDataUser().userId === parseInt(this.$route.params.id, 10)) {
-        Authenticator.updateUserProfile(this.results);
+        // Authenticator.updateUserProfile(this.results);
       }
     },
     remove(id) {
