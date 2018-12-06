@@ -51,4 +51,20 @@ const updateUserProfile = (values) => {
   }
 };
 
-export default { isLoggedIn, registerUser, getDataUser, removeUser, getDefaultUserOmId, updateUserProfile };
+const getUserProfile = () => {
+  const userProfile = getDataUser().userProfile;
+  if (userProfile) {
+    return userProfile.find(i => i.default === 'yes');
+  }
+  return {};
+};
+
+export default {
+  isLoggedIn,
+  registerUser,
+  getDataUser,
+  removeUser,
+  getDefaultUserOmId,
+  updateUserProfile,
+  getUserProfile,
+};
