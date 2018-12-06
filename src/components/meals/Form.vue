@@ -4,20 +4,8 @@
       <loaging-bar v-show="progress" />
       <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Formulário de refeições">
         <form id="demo-form2" class="form-horizontal form-label-left">
-          <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nome <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="first-name" v-model="name" required="required" class="form-control col-md-7 col-xs-12">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Ordem de Exibição <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="number" id="last-name" v-model="sort" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-            </div>
-          </div>
+          <input-text label="Nome" required="true" v-model="name"/>
+          <input-text label="Ordem de Exibição" required="true" v-model="sort"/>
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -39,6 +27,7 @@ import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
 import schemaMessage from './schemaMessage';
 import error from '../../common/DialogError';
+import InputText from '../layout/InputText';
 
 const baseUrl = Configurations.BASE_URL_API;
 
@@ -48,6 +37,7 @@ export default {
     TemplateDefault,
     LoagingBar,
     BoxContent,
+    InputText,
   },
   data() {
     return {
