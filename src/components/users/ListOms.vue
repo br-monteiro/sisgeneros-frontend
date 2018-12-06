@@ -28,6 +28,7 @@
                 <select v-model="selectedProfile" class="form-control col-md-7 col-xs-12">
                   <option value="root">{{'root' | translate}}</option>
                   <option value="admin">{{'admin' | translate}}</option>
+                  <option value="fiscalAgent">{{'fiscalAgent' | translate}}</option>
                   <option value="manager">{{'manager' | translate}}</option>
                   <option value="requester">{{'requester' | translate}}</option>
                   <option value="viewer" selected>{{'viewer' | translate}}</option>
