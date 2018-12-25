@@ -207,11 +207,11 @@
 </template>
 
 <script>
+import 'gentelella/vendors/Chart.js/dist/Chart.min';
 import TemplateDefault from '../layout/TemplateDefault';
 import Authenticator from '../../common/Authenticator';
 import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
-import 'gentelella/vendors/Chart.js/dist/Chart.min';
 
 export default {
   name: 'home',

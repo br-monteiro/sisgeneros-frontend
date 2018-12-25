@@ -3,7 +3,7 @@ const devHosts = [
   'dev.api.ceimbe.mb',
 ];
 
-const DEV_HOST_API = '//dev.api.ceimbe.mb/api/v1/';
+const DEV_HOST_API = '//www.ceimbe.mb/sisgeneros/api/v1/';
 
 const PRD_HOST_API = '//www.ceimbe.mb/app/sisgeneros-novo/api/v1/';
 
