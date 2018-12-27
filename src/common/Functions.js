@@ -43,7 +43,7 @@ const toInt = (value) => {
 };
 
 const clickPagination = (page, component) => {
-  if (component && typeof component.fecthData === 'function') {
+  if (component && typeof component.fetchData === 'function') {
     /* eslint-disable */
     page = component.$route.query.page && !page ? component.$route.query.page : page;
     /* eslint-enable */
@@ -62,7 +62,7 @@ const clickPagination = (page, component) => {
     /* eslint-disable */
     component.current = parsedPage;
     /* eslint-enable */
-    component.fecthData(parsedPage);
+    component.fetchData(parsedPage);
   }
 };
 
