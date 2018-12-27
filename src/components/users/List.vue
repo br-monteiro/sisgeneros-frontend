@@ -35,7 +35,12 @@
             </tr>
           </tbody>
         </table>
-        <navigation-buttons v-bind:total="allResults" url="/#/usuarios" v-bind:current="current" />
+        <navigation-buttons
+          :total="allResults"
+          :per-page="maxPerPage"
+          :current="current"
+          :click-handler="clickPagination"
+        />
       </box-content>
     </template-default>
   </div>
@@ -44,6 +49,7 @@
 <script>
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
+import functions from '../../common/Functions';
 import TemplateDefault from '../layout/TemplateDefault';
 import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
@@ -66,7 +72,7 @@ export default {
       dataUser: {},
       allResults: 0,
       maxPerPage: 50,
-      current: 1,
+      current: 0,
     };
   },
   created() {
@@ -77,37 +83,20 @@ export default {
     // getting the user data
     this.dataUser = Authenticator.getDataUser();
     this.axios.defaults.headers.common.Authorization = `Bearer ${this.dataUser.token}`;
-    this.fecthData();
-  },
-  watch: {
-    '$route.query.page': function page(value) {
-      this.fecthData(value);
-    },
+    this.clickPagination(); // fetchData
   },
   methods: {
     edit(id) {
       this.$router.push(`/usuarios/edit/${id}`);
     },
-    fecthData(page) {
-      let parsedPag = parseInt(page, 10);
-      if (isNaN(parsedPag)) {
-        parsedPag = this.current;
-      }
-
-      if (parsedPag === this.current && page !== undefined) return;
-
-      this.current = parsedPag;
-
-      if (parsedPag > 1) {
-        parsedPag = (parsedPag * this.maxPerPage) - 1;
-      }
-      if (parsedPag === 1) {
-        parsedPag = 0;
-      }
+    clickPagination(page) {
+      functions.clickPagination(page, this);
+    },
+    fetchData(page) {
       // active progress bar
       this.progress = true;
       // getting data
-      this.axios.get(`${baseUrl}users?limit=${this.maxPerPage}&offset=${parsedPag}`)
+      this.axios.get(`${baseUrl}users?limit=${this.maxPerPage}&page=${page}`)
         .then((response) => {
           // deactivating progress bar
           this.progress = false;

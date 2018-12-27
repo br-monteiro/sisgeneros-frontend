@@ -117,10 +117,10 @@ export default {
     // getting the user data
     this.dataUser = Authenticator.getDataUser();
     this.axios.defaults.headers.common.Authorization = `Bearer ${this.dataUser.token}`;
-    this.fecthData();
+    this.fetchData();
   },
   methods: {
-    fecthData() {
+    fetchData() {
       // active progress bar
       this.progress = true;
       // getting data
