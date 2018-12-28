@@ -1,19 +1,39 @@
 <template>
   <div>
-    <template-default pgtitle="Refeições">
+    <template-default pgtitle="Dias do cardápio">
       <loaging-bar v-show="progress" />
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Formulário de refeições">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Formulário de dias do cardápio">
         <form id="demo-form2" class="form-horizontal form-label-left">
-          <input-text label="Nome" required="true" v-model="name"/>
-          <input-text label="Ordem de Exibição" required="true" v-model="sort"/>
+          <input-text label="Dia" required="true" v-model="name" mask="##/##/####"/>
+          <input-text label="Refeição" required="true" />
+          <input-text label="Receita" required="true" />
+          <input-text label="Quantidade de Pessoas" required="true" maxlength="4" />
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-              <button class="btn btn-danger" type="button" @click="cancel">Cancelar</button>
-              <button type="submit" class="btn btn-success" @click="save">Salvar</button>
+              <button class="btn btn-danger" type="button" @click="notRun">Cancelar</button>
+              <button type="submit" class="btn btn-success" @click="notRun">Salvar</button>
             </div>
           </div>
         </form>
+      </box-content>
+      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Cardápio de 19-12 à 25-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Refeição</th>
+              <th>receita</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="day in dataWeek" v-bind:key="day.id">
+              <td>{{day.date | date}}</td>
+              <td>{{day.meal.name}}</td>
+              <td>{{day.recipe || range()}}</td>
+            </tr>
+          </tbody>
+        </table>
       </box-content>
     </template-default>
   </div>
@@ -46,6 +66,7 @@ export default {
       sort: 1,
       id: null,
       dataUser: {},
+      dataWeek: [],
     };
   },
   created() {
@@ -53,19 +74,20 @@ export default {
     if (!Authenticator.isLoggedIn()) {
       this.$router.push('/');
     }
+
     // getting the user data
     this.dataUser = Authenticator.getDataUser();
     this.axios.defaults.headers.common.Authorization = `Bearer ${this.dataUser.token}`;
 
-    if (this.$route.params.id) {
+    const t = true;
+    // if (this.$route.params.id) {
+    if (t) {
       // getting data
-      this.axios.get(`${baseUrl}meals/${this.$route.params.id}`)
+      this.axios.get(`${baseUrl}menudays/menu/${this.$route.params.id}`)
         .then((response) => {
           // deactivating progress bar
           this.progress = false;
-          this.id = response.data.data.id;
-          this.name = response.data.data.name;
-          this.sort = response.data.data.sort;
+          this.dataWeek = response.data.data;
         })
         .catch((response) => {
           // deactivating progress bar
@@ -136,6 +158,20 @@ export default {
     dialog(message) {
       const options = { size: 'sm' };
       this.$dialogs.alert(message, options);
+    },
+    notRun(event) {
+      event.preventDefault();
+    },
+    range() {
+      const temp = [
+        'Arroz com Galinha',
+        'Frango em Cubos',
+        'Filé ao Molho Branco',
+        'Bife com Fritas',
+        'Feijoada',
+      ];
+      const index = Math.floor((Math.random() * temp.length));
+      return temp[index].toUpperCase();
     },
   },
 };

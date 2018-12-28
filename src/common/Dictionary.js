@@ -27,4 +27,16 @@ export default [
     from: 'requester',
     to: 'Solicitante',
   },
+  {
+    from: 'fiscalAgent',
+    to: 'Agente Fiscal',
+  },
+  {
+    from: 'created',
+    to: 'Criado',
+  },
+  {
+    from: 'authorized',
+    to: 'Autorizado',
+  },
 ];

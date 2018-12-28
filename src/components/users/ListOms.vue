@@ -28,6 +28,7 @@
                 <select v-model="selectedProfile" class="form-control col-md-7 col-xs-12">
                   <option value="root">{{'root' | translate}}</option>
                   <option value="admin">{{'admin' | translate}}</option>
+                  <option value="fiscalAgent">{{'fiscalAgent' | translate}}</option>
                   <option value="manager">{{'manager' | translate}}</option>
                   <option value="requester">{{'requester' | translate}}</option>
                   <option value="viewer" selected>{{'viewer' | translate}}</option>
@@ -116,10 +117,10 @@ export default {
     // getting the user data
     this.dataUser = Authenticator.getDataUser();
     this.axios.defaults.headers.common.Authorization = `Bearer ${this.dataUser.token}`;
-    this.fecthData();
+    this.fetchData();
   },
   methods: {
-    fecthData() {
+    fetchData() {
       // active progress bar
       this.progress = true;
       // getting data
@@ -146,7 +147,7 @@ export default {
           this.results = response.data.data;
           this.selected = {};
           this.selectedProfile = '';
-          this.dialog('Perfil adicionado com sucesso');
+          this.dialog('Perfil adicionado com sucesso. Para que esse perfil seja usado é necessário deslogar do sistema.');
           this.updateUserProfile();
         })
         .catch((response) => {
@@ -159,7 +160,7 @@ export default {
     },
     updateUserProfile() {
       if (Authenticator.getDataUser().userId === parseInt(this.$route.params.id, 10)) {
-        Authenticator.updateUserProfile(this.results);
+        // Authenticator.updateUserProfile(this.results);
       }
     },
     remove(id) {

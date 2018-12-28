@@ -1,6 +1,6 @@
 <template>
     <!-- menu-->
-    <div class="col-md-3 left_col menu_fixed">
+    <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
             <a v-bind:href="`${baseUrl}#/`" class="site_title">
@@ -35,7 +35,7 @@
                 </li>
                 <li>
                     <a>
-                        <i class="fa fa-briefcase"></i> Fornecedores
+                        <i class="fa fa-truck"></i> Fornecedores
                         <span class="fa fa-chevron-down"></span>
                     </a>
                     <ul class="nav child_menu">
@@ -81,6 +81,16 @@
                     <ul class="nav child_menu">
                         <li><a v-bind:href="`${baseUrl}#/licitacoes`">Listar</a></li>
                         <li><a v-bind:href="`${baseUrl}#/licitacoes/new`">Registrar</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-th-list"></i> Cardápios
+                        <span class="fa fa-chevron-down"></span>
+                    </a>
+                    <ul class="nav child_menu">
+                        <li><a v-bind:href="`${baseUrl}#/cardapios`">Listar</a></li>
+                        <li><a v-bind:href="`${baseUrl}#/cardapios/new`">Registrar</a></li>
                     </ul>
                 </li>
                 <!--
@@ -181,17 +191,17 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Settings">
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            <a>
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            <a>
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            <a>
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            <a>
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>
         <!-- /menu footer buttons -->
@@ -215,4 +225,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+div.sidebar-footer a {
+    background-color: #172D44;
+    color: #172D44;
+}
 </style>

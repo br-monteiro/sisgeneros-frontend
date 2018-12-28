@@ -86,7 +86,12 @@
             </tr>
           </tbody>
         </table>
-        <navigation-buttons v-bind:total="allResults" v-bind:url="`${url}/#/licitacoes/edit/${id}/itens`" v-bind:current="current" />
+        <navigation-buttons
+          :total="allResults"
+          :per-page="maxPerPage"
+          :current="current"
+          :click-handler="clickPagination"
+        />
       </box-content>
     </template-default>
   </div>
@@ -95,6 +100,7 @@
 <script>
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
+import functions from '../../common/Functions';
 import TemplateDefault from '../layout/TemplateDefault';
 import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
@@ -125,7 +131,7 @@ export default {
       dataUser: {},
       allResults: 0,
       maxPerPage: 50,
-      current: 1,
+      current: 0,
       url: Configurations.BASE_URL_APP,
       id: null,
       editSupplier: false,
@@ -152,38 +158,20 @@ export default {
     // getting the user data
     this.dataUser = Authenticator.getDataUser();
     this.axios.defaults.headers.common.Authorization = `Bearer ${this.dataUser.token}`;
-    this.fecthData();
-  },
-  watch: {
-    '$route.query.page': function page(value) {
-      this.fecthData(value);
-    },
+    this.clickPagination(); // fetchData
   },
   methods: {
     edit(value) {
       this.select(value);
     },
-    fecthData(page) {
-      let parsedPag = parseInt(page, 10);
-
-      if (isNaN(parsedPag)) {
-        parsedPag = this.current;
-      }
-
-      if (parsedPag === this.current && page !== undefined) return;
-
-      this.current = parsedPag;
-
-      if (parsedPag > 1) {
-        parsedPag = (parsedPag * this.maxPerPage) - 1;
-      }
-      if (parsedPag === 1) {
-        parsedPag = 0;
-      }
+    clickPagination(page) {
+      functions.clickPagination(page, this);
+    },
+    fetchData(page) {
       // active progress bar
       this.progress = true;
       // getting data
-      this.axios.get(`${baseUrl}biddingsitems/bidding/${this.id}?limit=${this.maxPerPage}&offset=${parsedPag}`)
+      this.axios.get(`${baseUrl}biddingsitems/bidding/${this.id}?limit=${this.maxPerPage}&page=${page}`)
         .then((response) => {
           // deactivating progress bar
           this.progress = false;
@@ -229,24 +217,19 @@ export default {
       const options = { size: 'sm' };
       this.$dialogs.alert(message, options);
     },
-    toInt(value) {
-      const parsedValue = parseInt(value, 10);
-      if (isNaN(parsedValue)) return 0;
-      return parsedValue;
-    },
     save(event) {
       event.preventDefault();
       // active progress bar
       this.progress = true;
       if (this.bidding.id) {
         this.axios.put(`${baseUrl}biddingsitems/${this.bidding.id}`, {
-          number: this.toInt(this.bidding.number),
+          number: functions.toInt(this.bidding.number),
           name: this.bidding.name,
           initialQuantity: parseFloat(this.bidding.initialQuantity),
           value: this.bidding.value,
           supplyUnit: this.bidding.supplyUnit,
           suppliersId: this.bidding.suppliers.id,
-          biddingsId: this.toInt(this.bidding.biddings.id),
+          biddingsId: functions.toInt(this.bidding.biddings.id),
         })
           .then((response) => {
             // deactivating progress bar
@@ -271,13 +254,13 @@ export default {
           });
       } else {
         this.axios.post(`${baseUrl}biddingsitems`, {
-          number: this.toInt(this.bidding.number),
+          number: functions.toInt(this.bidding.number),
           name: this.bidding.name,
           initialQuantity: parseFloat(this.bidding.initialQuantity),
           value: this.bidding.value,
           supplyUnit: this.bidding.supplyUnit,
           suppliersId: this.bidding.suppliers.id,
-          biddingsId: this.toInt(this.id),
+          biddingsId: functions.toInt(this.id),
         })
           .then((response) => {
             // deactivating progress bar

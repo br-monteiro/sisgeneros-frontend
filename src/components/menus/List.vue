@@ -1,34 +1,34 @@
 <template>
   <div>
-    <template-default pgtitle="Lista de Usuários">
+    <template-default pgtitle="Cardápios">
       <loaging-bar v-show="progress"></loaging-bar>
-      <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de usuários">
+      <box-content class="col-md-12 col-sm-12 col-xs-12" :boxtitle="`Lista de cardápios - ${navalIndicative.militaryOrganizationNavalIndicative}`">
         <table class="table">
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>NIP</th>
-              <th>Posto/Graduação</th>
-              <th>Ativo</th>
-              <th>OM</th>
+              <th>Início</th>
+              <th>Fim</th>
+              <th>Status</th>
+              <th>Solicitante</th>
+              <th>Autorizador</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="result in results" v-bind:key="result.id">
-              <th>{{result.name}}</th>
-              <th>{{result.nip}}</th>
-              <th>{{result.militaryPost}}</th>
-              <th>{{result.active | translate}}</th>
-              <th v-html="om(result.militaryOrganizations)"></th>
+              <th>{{result.beginning | date}}</th>
+              <th>{{result.ending | date}}</th>
+              <th>{{result.status | translate}}</th>
+              <th>{{result.requesterUser.name}}</th>
+              <th>{{result.authorizerUser.name}}</th>
               <th>
-                <button class="btn btn-xs btn-info" @click="goTo(`/usuarios/edit/${result.id}/oms`)">
-                  <i class="fa fa-university"></i>
+                <button class="btn btn-xs btn-success" @click="editMenuDays(result.id)">
+                  <i class="fa fa-calendar"></i>
                 </button>
-                <button class="btn btn-xs btn-success" @click="edit(result.id)">
+                <button class="btn btn-xs btn-info">
                   <i class="fa fa-edit"></i>
                 </button>
-                <button class="btn btn-xs btn-danger" @click="remove(result.id)">
+                <button class="btn btn-xs btn-danger">
                   <i class="fa fa-close"></i>
                 </button>
               </th>
@@ -58,7 +58,7 @@ import NavigationButtons from '../layout/NavigationButtons';
 const baseUrl = Configurations.BASE_URL_API;
 
 export default {
-  name: 'usersList',
+  name: 'menusList',
   components: {
     TemplateDefault,
     LoagingBar,
@@ -73,6 +73,7 @@ export default {
       allResults: 0,
       maxPerPage: 50,
       current: 0,
+      navalIndicative: Authenticator.getUserProfile(),
     };
   },
   created() {
@@ -87,7 +88,7 @@ export default {
   },
   methods: {
     edit(id) {
-      this.$router.push(`/usuarios/edit/${id}`);
+      this.$router.push(`/cardapios/edit/${id}`);
     },
     clickPagination(page) {
       functions.clickPagination(page, this);
@@ -96,7 +97,7 @@ export default {
       // active progress bar
       this.progress = true;
       // getting data
-      this.axios.get(`${baseUrl}users?limit=${this.maxPerPage}&page=${page}`)
+      this.axios.get(`${baseUrl}menus?limit=${this.maxPerPage}&page=${page}`)
         .then((response) => {
           // deactivating progress bar
           this.progress = false;
@@ -113,7 +114,7 @@ export default {
       // active progress bar
       this.progress = true;
 
-      this.axios.delete(`${baseUrl}users/${id}`)
+      this.axios.delete(`${baseUrl}menus/${id}`)
         .then((response) => {
           if (response.status === 204) {
             // deactivating progress bar
@@ -127,16 +128,8 @@ export default {
           console.error(response);
         });
     },
-    om(value) {
-      if (Array.isArray(value)) {
-        return value.map(i => i.navalIndicative).join('<br>');
-      }
-      return value;
-    },
-    goTo(url) {
-      if (url) {
-        this.$router.push(url);
-      }
+    editMenuDays(id) {
+      this.$router.push(`/cardapios/edit/${id}/dias`);
     },
   },
 };
