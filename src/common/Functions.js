@@ -66,4 +66,19 @@ const clickPagination = (page, component) => {
   }
 };
 
-export default { jsonParse, stringfy, getLocalStorage, setLocalStorage, toInt, clickPagination };
+const formatDate = (value) => {
+  if (value) {
+    return value.split('-').reverse().join('-');
+  }
+  return value;
+};
+
+export default {
+  jsonParse,
+  stringfy,
+  getLocalStorage,
+  setLocalStorage,
+  toInt,
+  clickPagination,
+  formatDate,
+};
