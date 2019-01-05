@@ -28,12 +28,14 @@
           <thead>
             <tr>
               <th>Nome do Item</th>
+              <th>Quantidade</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="result in results" v-bind:key="result.id">
               <td>{{result.name}}</td>
+              <td>{{result.quantity}}</td>
               <td>
                 <button class="btn btn-xs btn-info" @click="editItem(result.id)">
                   <i class="fa fa-edit"></i>

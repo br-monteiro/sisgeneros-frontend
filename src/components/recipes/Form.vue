@@ -17,15 +17,25 @@
               <input type="text" id="name" v-model="name" required="required" class="form-control col-md-7 col-xs-12">
             </div>
           </div>
-          <div class="form-group" v-for="(item, index) in items" v-bind:key="index">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="items">
-              <button class="btn btn-danger" v-show="index !== 0" type="button" @click="removeItem(item, index)">
-                <i class="fa fa-trash"></i>
-              </button>
-              Item <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="items" v-model="item.name" name="items" required="required" class="form-control col-md-7 col-xs-12">
+          <div v-for="(item, index) in items" v-bind:key="index">
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="items">
+                <button class="btn btn-danger" v-show="index !== 0" type="button" @click="removeItem(item, index)">
+                  <i class="fa fa-trash"></i>
+                </button>
+                Item <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" v-model="item.name" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="items">
+                Quantidade <span class="required">*</span>
+              </label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="text" v-model="item.quantity" required="required" class="form-control col-md-7 col-xs-12">
+              </div>
             </div>
           </div>
           <div class="ln_solid"></div>
@@ -44,11 +54,12 @@
 <script>
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
+import error from '../../common/DialogError';
+import fn from '../../common/Functions';
 import TemplateDefault from '../layout/TemplateDefault';
 import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
 import schemaMessage from './schemaMessage';
-import error from '../../common/DialogError';
 
 const baseUrl = Configurations.BASE_URL_API;
 
@@ -63,7 +74,7 @@ export default {
     return {
       progress: false,
       name: '',
-      items: [{ name: '' }],
+      items: [{ name: '', quantity: '' }],
       id: null,
       dataUser: {},
       militaryOrganizationsId: 0,
@@ -93,7 +104,7 @@ export default {
           // deactivating progress bar
           this.progress = false;
           this.name = '';
-          this.items = [{ name: '' }];
+          this.items = [{ name: '', quantity: '' }];
           this.dialog('Resgistro salvo com sucesso');
         })
         .catch((response) => {
@@ -114,7 +125,7 @@ export default {
       this.$dialogs.alert(message, options);
     },
     addItem() {
-      this.items.push({ name: '' });
+      this.items.push({ name: '', quantity: '' });
     },
     removeItem(item, index) {
       if (this.items.length > 1) {
@@ -130,6 +141,7 @@ export default {
         }
       });
       itemsMap.forEach((item) => {
+        item.quantity = fn.toFloat(item.quantity);
         preparedMap.push(item);
       });
       return preparedMap;

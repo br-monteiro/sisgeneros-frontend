@@ -4,14 +4,8 @@
       <loaging-bar v-show="progress" />
       <box-content class="col-md-12 col-sm-12 col-xs-12" boxtitle="Lista de refeições">
         <form id="demo-form2" class="form-horizontal form-label-left">
-          <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-              Nome <span class="required">*</span>
-            </label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <input type="text" id="name" v-model="name" required="required" class="form-control col-md-7 col-xs-12">
-            </div>
-          </div>
+          <input-text label="Nome" required="true" v-model="name" />
+          <input-text label="Quantidade" required="true" v-model="quantity" />
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -28,11 +22,13 @@
 <script>
 import Configurations from '../../common/Configurations';
 import Authenticator from '../../common/Authenticator';
+import error from '../../common/DialogError';
+import fn from '../../common/Functions';
 import TemplateDefault from '../layout/TemplateDefault';
 import LoagingBar from '../layout/LoadingBar';
 import BoxContent from '../layout/BoxContent';
 import schemaMessage from './schemaMessage';
-import error from '../../common/DialogError';
+import InputText from '../layout/InputText';
 
 const baseUrl = Configurations.BASE_URL_API;
 
@@ -42,11 +38,13 @@ export default {
     TemplateDefault,
     LoagingBar,
     BoxContent,
+    InputText,
   },
   data() {
     return {
       progress: false,
       name: '',
+      quantity: '',
       dataUser: {},
     };
   },
@@ -66,6 +64,7 @@ export default {
           // deactivating progress bar
           this.progress = false;
           this.name = response.data.data.name;
+          this.quantity = response.data.data.quantity;
         })
         .catch((response) => {
           // deactivating progress bar
@@ -85,13 +84,13 @@ export default {
       if (this.$route.params.id) {
         this.axios.put(`${baseUrl}recipespatterns/recipe/item/${this.$route.params.idItem}`, {
           name: this.name,
-          cnpj: this.cnpj,
-          contacts: this.contacts,
+          quantity: fn.toFloat(this.quantity),
         })
           .then((response) => {
             // deactivating progress bar
             this.progress = false;
             this.name = response.data.data.name;
+            this.quantity = response.data.data.quantity;
             this.dialog('Resgistro salvo com sucesso');
           })
           .catch((response) => {

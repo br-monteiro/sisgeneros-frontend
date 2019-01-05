@@ -42,6 +42,18 @@ const toInt = (value) => {
   return parsedValue;
 };
 
+const toFloat = (value) => {
+  let parsedValue = parseFloat(value, 10);
+  if (isNaN(parsedValue) || parsedValue === 0) {
+    parsedValue = value && typeof value.replace === 'function' && value.replace('.', '').replace(',', '.');
+    parsedValue = parseFloat(parsedValue, 10);
+    if (isNaN(parsedValue) || parsedValue === 0) {
+      return 0;
+    }
+  }
+  return parsedValue;
+};
+
 const clickPagination = (page, component) => {
   if (component && typeof component.fetchData === 'function') {
     /* eslint-disable */
@@ -79,6 +91,7 @@ export default {
   getLocalStorage,
   setLocalStorage,
   toInt,
+  toFloat,
   clickPagination,
   formatDate,
 };
